@@ -160,5 +160,5 @@ cython_debug/
 #.idea/
 
 #Project specific ignores
-APIkey.txt
-TODO.txt
+*.m4a
+*.wav
