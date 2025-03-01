@@ -25,8 +25,11 @@ TREBLE = (4000, 20000)
 def compute_band_energy(frequencies, fft_data, freq_range):
     indices = (frequencies >= freq_range[0]) & (frequencies <= freq_range[1])
     band_amplitudes = fft_data[indices]
-    rms = np.sqrt(np.mean(band_amplitudes ** 2)) if len(band_amplitudes) > 0 else 0
-    return np.sum(band_amplitudes), rms
+    if len(band_amplitudes) == 0:
+        return 0, 0
+    band_sum = np.sum(band_amplitudes)
+    band_rms = np.sqrt(np.mean(band_amplitudes ** 2))
+    return band_sum, band_rms
 
 # Iterate over beats
 beat_number = 1
