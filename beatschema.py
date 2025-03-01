@@ -4,7 +4,7 @@ import datetime
 from typing import Optional
 
 class BeatSchema:
-    def __init__(self, rounding=3):
+    def __init__(self, rounding=2):
 
         self.ease = -1
         self.rounding = rounding
@@ -24,11 +24,11 @@ class BeatSchema:
                 },
                 {
                 "name":"value",
-                "value":float(range(0,2))
+                "value":float # value between 0 and 1
                 },
                 {
                 "name":"ease",
-                "value":range(-1,2) # -1 = ease out, 0 = linear, 1 = ease in
+                "value":int # -1 = ease out, 0 = linear, 1 = ease in
                 }
             ]
         }
