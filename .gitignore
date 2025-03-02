@@ -166,3 +166,4 @@ cython_debug/
 *.opus
 *jpg
 *.mp4
+/random_untracked/

@@ -27,7 +27,7 @@ class BeatSchema:
             {"archetype":"#BPM_CHANGE","data":[{"name":"#BEAT","value":0},{"name":"#BPM","value":self.bpm}]},
             {"archetype":"#TIMESCALE_CHANGE","data":[{"name":"#BEAT","value":0},
             {"name":"#TIMESCALE","value":1}]},
-            {"archetype":"ShiftEvent","data":[]}
+            #{"archetype":"ShiftEvent","data":[]} this wrote an empty entry but instead of doing it properly i just commented it out lmao bow before my genius
             ]}
 
         self.leveldata_shift_event = {
@@ -188,12 +188,17 @@ class BeatSchema:
         return
 
     def write_to_leveldata(self, filename: Optional[str] = None):
-        self.write_shift_event_references() # only used here so only called in here
+        self.write_shift_event_references()  # Only used here so only called in here
         if not filename:
             now = datetime.datetime.now()
             filename = f"{now.day}-{now.month}-{now.year}_output.json"
-        self.leveldata_header["entities"] = self.entities_list
-        json_data = json.dumps(self.leveldata_header, indent=0) # 0 indent for compression reasons
+        header = copy.deepcopy(self.leveldata_header)
+        print(header)
+        shiftevent_data = self.entities_list.copy()
+        print('-------------------------------------------------------------------------')
+        header["entities"].extend(shiftevent_data)
+        print(header)
+        json_data = json.dumps(header, indent=0)  # 0 indent for compression reasons
         with gzip.open(filename, "wb") as f:
             f.write(json_data.encode("utf-8"))
 
