@@ -162,3 +162,7 @@ cython_debug/
 #Project specific ignores
 *.m4a
 *.wav
+*.json
+*.opus
+*jpg
+*.mp4
